@@ -1,6 +1,8 @@
 ﻿@model CheeseMVC.ViewModels.AddMenuViewModel
 
-<h1>New Menu</h1>
+@{
+    ViewBag.Title = "New Menu";
+}
 
 <form asp-controller="Menu" asp-action="Add" method="post">
 

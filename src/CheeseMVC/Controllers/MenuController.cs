@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using CheeseMVC.Models;
 using CheeseMVC.ViewModels;
 using CheeseMVC.Data;
@@ -43,6 +44,37 @@ namespace CheeseMVC.Controllers
                 return Redirect("Menu/ViewMenu/" + newMenu.ID);
             }
             return View(addMenuViewModel);
+        }
+
+        public IActionResult ViewMenu(int id)
+        {
+            Menu newMenu = context.Menus.Single(m => m.ID == id);
+            List<CheeseMenu> items = context
+                .CheeseMenus
+                .Include(item => item.Cheese)
+                .Where(cm => cm.MenuID == id)
+                .ToList();
+            ViewMenuViewModel viewMenuViewModel = new ViewMenuViewModel
+            {
+                Menu = newMenu,
+                Items = items
+            };
+            return View(viewMenuViewModel);
+        }
+
+        public IActionResult AddItem(int id)
+        {
+            Menu newMenu = context.Menus.Single(m => m.ID == id);
+            IEnumerable<Cheese> cheeses = context.Cheeses.Include(c => c.Category).ToList();
+            AddMenuItemViewModel addMenuItemViewModel = new AddMenuItemViewModel(newMenu, cheeses);
+
+            return View(addMenuItemViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult AddItem(AddMenuItemViewModel addMenuItemViewModel)
+        {
+            return View(addMenuItemViewModel);
         }
     }
 }
