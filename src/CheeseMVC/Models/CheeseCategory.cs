@@ -8,13 +8,8 @@ namespace CheeseMVC.Models
     public class CheeseCategory
     {
         public int ID { get; set; }
-        private static int nextId = 1;
         public string Name { get; set; }
+        public IList<Cheese> Cheeses { get; set; }
 
-        public CheeseCategory()
-        {
-            ID = nextId;
-            nextId++;
-        }
     }
 }

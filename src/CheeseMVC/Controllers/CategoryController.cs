@@ -7,8 +7,6 @@ using CheeseMVC.Models;
 using CheeseMVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace CheeseMVC.Controllers
 {
     public class CategoryController : Controller
@@ -41,6 +39,7 @@ namespace CheeseMVC.Controllers
                 newCategory.Name = addCategoryViewModel.Name;
                 context.Categories.Add(newCategory);
                 context.SaveChanges();
+
                 return Redirect("/Category");
             }
             return View(addCategoryViewModel);
