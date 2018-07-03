@@ -4,15 +4,15 @@
 <br />
 @if (Model.Count == 0)
 {
-    <p>No cheeses yet!</p>
+    <p>There seem to be no menus yet...</p>
 }
 
-<ul>
+<ul class="list-group" style="width:70%">
     @foreach (var menu in Model)
     {
-        <li><a asp-controller="Menu" asp-action="ViewMenu" asp-route="@menu.ID">@menu.Name</a></li>
+        <li class="list-group-item">
+        <a asp-controller="Menu" asp-action="ViewMenu" asp-route-id="@menu.ID">@menu.Name</a></li>
     }
-
 </ul>
 
-<p><a asp-controller="Menu" asp-action="Add">Add Menu</a></p>
+<p><a asp-controller="Menu" asp-action="Add">Add a Menu</a></p>

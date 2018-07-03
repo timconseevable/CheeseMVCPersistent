@@ -20,8 +20,16 @@ namespace CheeseMVC.Controllers
         public IActionResult Index()
         {
             IList<Cheese> cheeses = context.Cheeses.Include(c => c.Category).ToList();
-
             return View(cheeses);
+        }
+
+        [HttpPost]
+        public IActionResult Index(int cheeseId)
+        {
+            Cheese CheeseToRemove = context.Cheeses.Single(c => c.ID == cheeseId);
+            context.Cheeses.Remove(CheeseToRemove);
+            context.SaveChanges();
+            return Redirect("/");
         }
 
         public IActionResult Add()
@@ -48,8 +56,7 @@ namespace CheeseMVC.Controllers
                 };
                 context.Cheeses.Add(newCheese);
                 context.SaveChanges();
-
-                return Redirect("/Cheese");
+                return Redirect("/");
             }
 
             return View(addCheeseViewModel);
@@ -70,9 +77,7 @@ namespace CheeseMVC.Controllers
                 Cheese theCheese = context.Cheeses.Single(c => c.ID == cheeseId);
                 context.Cheeses.Remove(theCheese);
             }
-
             context.SaveChanges();
-
             return Redirect("/");
         }
     }

@@ -1,11 +1,15 @@
 ﻿@model List<CheeseMVC.Models.CheeseCategory>
 
-<h2>Categories</h2>
+<h1>Categories</h1>
 <br />
-<ul>
+@if (Model.Count == 0)
+{
+    <p>We need some categories here!</p>
+}
+<ul class="list-group" style="width:70%">
     @foreach (var category in Model)
     {
-        <li>@category.Name</li>
+        <li class="list-group-item">@category.Name</li>
     }
 </ul>
 

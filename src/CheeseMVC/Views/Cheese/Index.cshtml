@@ -1,28 +1,37 @@
 ﻿@model List<CheeseMVC.Models.Cheese>
 
-<h1>@ViewBag.Title</h1>
+<h1>Cheeses</h1>
 <br />
 
-@if (Model.Count == 0)
-{
-    <p>No cheeses yet!</p>
-}
-
-<table class="table">
+<table class="table" style="width:90%">
 
     <tr>
         <th>Name</th>
         <th>Description</th>
-        <td>Category</td>
+        <th>Category</th>
+        <th>[remove]</th>
     </tr>
 
-    @foreach (var cheese in Model)
+    @if (Model.Count == 0)
     {
-        <tr>
-            <td>@cheese.Name</td>
-            <td>@cheese.Description</td>
-            <td>@cheese.Category.Name</td>
-        </tr>
+        <tr><td>Where did all the cheese go?</td></tr>
+    }
+    else
+    {
+        @foreach (var cheese in Model)
+        {
+            <tr>
+                <td>@cheese.Name</td>
+                <td>@cheese.Description</td>
+                <td>@cheese.Category.Name</td>
+                <td>
+                    <form method="post">
+                        <input type="hidden" name="cheeseID" id="@cheese.ID" value="@cheese.ID" />
+                        <button type="submit" class="btn btn-danger btn-xs">[ - ]</button>
+                    </form>
+                </td>
+            </tr>
+        }
     }
 </table>
 

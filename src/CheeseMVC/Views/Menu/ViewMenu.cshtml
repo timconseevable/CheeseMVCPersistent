@@ -1,6 +1,6 @@
 ﻿@model CheeseMVC.ViewModels.ViewMenuViewModel
 @{
-    ViewBag.Title = "MENU NAME";
+    ViewBag.Title = Model.Menu.Name;
 }
 
 <h1>@Model.Menu.Name</h1>
@@ -10,10 +10,10 @@
     <p>No cheeses yet!</p>
 }
 
-<ul>
+<ul class="list-group" style="width:70%">
     @foreach(var item in Model.Items)
     {
-        <li>@item.Cheese.Name</li>
+        <li class="list-group-item">@item.Cheese.Name</li>
     }
 </ul>
 
